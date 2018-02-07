@@ -69,12 +69,6 @@ namespace UserService.Controllers
         async  Task<Boolean> DoesUserExist(User u) {
             var hc = Helpers.CouchDBConnect.GetClient("users");
             var response = await hc.GetAsync("users/"+u._id);
-            Console.WriteLine("***************************************************************");
-            Console.WriteLine("***************************************************************");
-            Console.WriteLine(response.Content);
-            Console.WriteLine("***************************************************************");
-            Console.WriteLine("***************************************************************");
-
             if (response.IsSuccessStatusCode) {
                 return true;
             }
@@ -108,9 +102,25 @@ namespace UserService.Controllers
         }
 
         // DELETE api/values/5
+        [Route("DeleteUser")]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<Boolean> Delete(int id)
         {
+            id=1;
+            String st="1";
+            Console.WriteLine("im in delete");
+            /*var doesExist = await DoesUserExist(u);
+                if (!doesExist) {
+                    Console.WriteLine("user doesn't exist");  
+                    return false;              
+                }*/
+                var hc = Helpers.CouchDBConnect.GetClient("users");
+            //    string json = JsonConvert.SerializeObject(u);
+                var response= await hc.DeleteAsync(hc.BaseAddress+"/"+st);
+                Console.WriteLine(response);
+            return true;
         }
+
+
     }
 }
