@@ -69,6 +69,12 @@ namespace UserService.Controllers
         async  Task<Boolean> DoesUserExist(User u) {
             var hc = Helpers.CouchDBConnect.GetClient("users");
             var response = await hc.GetAsync("users/"+u._id);
+            Console.WriteLine("***************************************************************");
+            Console.WriteLine("***************************************************************");
+            Console.WriteLine(response.Content);
+            Console.WriteLine("***************************************************************");
+            Console.WriteLine("***************************************************************");
+
             if (response.IsSuccessStatusCode) {
                 return true;
             }

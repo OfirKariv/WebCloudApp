@@ -12,6 +12,7 @@ namespace UserService.Helpers
         public static HttpClient GetClient(string db) {
             var hc = new HttpClient();
             hc.BaseAddress = new Uri(string.Format(host,db));
+            Console.WriteLine( "base adress-heleprs: "+ hc.BaseAddress);
             hc.DefaultRequestHeaders.Clear();
             hc.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             Console.WriteLine(hc.DefaultRequestHeaders);
